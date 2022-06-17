@@ -16,22 +16,24 @@ def main():
         os.mkdir(os.path.join(f'./_sssp_{func}', element))
     
     for folder in [
-        "NC-DOJOv4-standard",
-        "NC-DOJOv4-stringent",
-        "NC-SG15-ONCVPSP4",
-        "PAW-JTH1.1-standard",
-        "PAW-JTH1.1-stringent",
-        "PAW-PSL0.x",
-        "PAW-PSL1.0.0-high",
-        "PAW-PSL1.0.0-low",
-        "US-GBRV-1.x",
-        "US-PSL0.x",
-        "US-PSL1.0.0-high",
-        "US-PSL1.0.0-low",
-        "UNCATOGRIZED",
-        "PAW-RE-Wentzcovitch/legacy",
-        "PAW-RE-Wentzcovitch/neo",
+        # "NC-DOJOv4-standard",
+        # "NC-DOJOv4-stringent",
+        # "NC-SG15-ONCVPSP4",
+        # "PAW-JTH1.1-standard",
+        # "PAW-JTH1.1-stringent",
+        # "PAW-PSL0.x",
+        # "PAW-PSL1.0.0-high",
+        # "PAW-PSL1.0.0-low",
+        # "US-GBRV-1.x",
+        # "US-PSL0.x",
+        # "US-PSL1.0.0-high",
+        # "US-PSL1.0.0-low",
+        # "UNCATOGRIZED",
+        # "PAW-RE-Wentzcovitch/legacy",
+        # "PAW-RE-Wentzcovitch/neo",
+        "PAW-RE-Wentzcovitch/neo-simon",
     ]:
+        print(folder)
         psp_folder = os.path.join(func_path, folder)
         for psp_filename in os.listdir(psp_folder):
             if psp_filename.startswith(f'{element}.'):
@@ -39,6 +41,7 @@ def main():
                 dst = os.path.join(link_dst_path, psp_filename)
                 
                 try:
+                    print('try symlink')
                     os.symlink(src, dst)
                 except FileExistsError:
                     os.remove(dst)
@@ -52,4 +55,5 @@ def main():
                     print(f'Linking: {src} -> {dst}')
                 
 if __name__ == '__main__':
+    # print('hello')
     main()

@@ -24,6 +24,12 @@ def inputs_from_mode(mode, computer_label, properties_list):
         mpiprocs = 32
         npool = 4
         walltime = 3600
+    elif computer_label == 'daint-mc':
+        computer = f'daint-mc'
+        mpiprocs = 36
+        npool = 4
+        walltime = 1800
+
     else:
         computer = f'eiger-mc-{computer_label}'
         mpiprocs = 128
@@ -41,7 +47,7 @@ def inputs_from_mode(mode, computer_label, properties_list):
             dict={
                 "resources": {
                     "num_machines": 1,
-                    "num_mpiprocs_per_machine": 1,
+                    "num_mpiprocs_per_machine": 1
                 },
                 "max_wallclock_seconds": 1800,
                 "withmpi": False,
@@ -61,6 +67,7 @@ def inputs_from_mode(mode, computer_label, properties_list):
                 "resources": {
                     "num_machines": 1,
                     "num_mpiprocs_per_machine": mpiprocs,
+                    "num_cores_per_mpiproc": 1
                 },
                 "max_wallclock_seconds": walltime,
                 "withmpi": True,
@@ -80,6 +87,7 @@ def inputs_from_mode(mode, computer_label, properties_list):
                 "resources": {
                     "num_machines": 1,
                     "num_mpiprocs_per_machine": mpiprocs,
+                    "num_cores_per_mpiproc": 1
                 },
                 "max_wallclock_seconds": walltime,
                 "withmpi": True,
@@ -94,7 +102,7 @@ def inputs_from_mode(mode, computer_label, properties_list):
 @click.option('profile', '-p', help='profile')
 @click.option('--mode', type=click.Choice(['TEST', 'PRECHECK', 'STANDARD'], case_sensitive=False), 
               help='mode of verification.')
-@click.option('--computer', type=click.Choice(['mr0', 'mr32', 'imx'], case_sensitive=True),
+@click.option('--computer', type=click.Choice(['mr0', 'mr32', 'imx', 'daint-mc'], case_sensitive=True),
               help='computer to run non-test verification.')
 @click.option('--test-mode', is_flag=True, default=False, # TODO: rename to `--no-cleanup`
               help='in test mode the remote folder will not being cleaned.')

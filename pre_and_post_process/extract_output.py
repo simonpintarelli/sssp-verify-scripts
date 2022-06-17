@@ -137,7 +137,7 @@ def run(pks, element, dst, profile, update):
             _node  = orm.load_node(pk)
             label = _node.extras.get("label").split()[-1]   # do not contain the extra machine info
             assert element == label.split('.')[0]
-            assert f'{label}.upf' ==  _node.inputs.pseudo.filename
+            assert f'{label}.UPF' ==  _node.inputs.pseudo.filename or f'{label}.upf' ==  _node.inputs.pseudo.filename
             
             if update:
                 # append the new _metadata of the output node if it update the previous result
@@ -206,4 +206,3 @@ def run(pks, element, dst, profile, update):
             
 if __name__ == '__main__':
     run()
-
